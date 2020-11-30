@@ -122,6 +122,7 @@ public enum QuestHelperQuest
 	MERLINS_CRYSTAL(394, "Merlin's Crystal", QuestVarPlayer.QUEST_MERLINS_CRYSTAL),
 	MONKEY_MADNESS_I(395, "Monkey Madness I", QuestVarPlayer.QUEST_MONKEY_MADNESS_I),
 	MONKEY_MADNESS_II(396, "Monkey Madness II", QuestVarbits.QUEST_MONKEY_MADNESS_II),
+	MONKEY_MADNESS_II_TESTING(396, "Monkey Madness II - Testing", QuestVarbits.QUEST_MONKEY_MADNESS_II_TESTING),
 	MONKS_FRIEND(397, "Monk's Friend", QuestVarPlayer.QUEST_MONKS_FRIEND),
 	MOUNTAIN_DAUGHTER(398, "Mountain Daughter", QuestVarbits.QUEST_MOUNTAIN_DAUGHTER),
 	MOURNINGS_END_PART_I(399, "Mourning's End Part I", QuestVarPlayer.QUEST_MOURNINGS_END_PART_I),

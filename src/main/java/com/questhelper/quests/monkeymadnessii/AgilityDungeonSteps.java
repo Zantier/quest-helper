@@ -42,6 +42,7 @@ import com.questhelper.steps.conditional.ZoneCondition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.ItemID;
 import net.runelite.api.NpcID;
@@ -470,10 +471,6 @@ public class AgilityDungeonSteps extends DetailedOwnerStep
 		else if (inKrukRoom.checkCondition(client))
 		{
 			startUpStep(fightKruk);
-		}
-		else if (openedShortcut.checkCondition(client))
-		{
-			startUpStep(enterShortcut);
 		}
 		else if (inCavesSection3.checkCondition(client))
 		{

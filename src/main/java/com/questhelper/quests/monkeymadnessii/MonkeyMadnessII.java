@@ -61,11 +61,12 @@ import com.questhelper.panel.PanelDetails;
 import com.questhelper.questhelpers.BasicQuestHelper;
 import com.questhelper.steps.QuestStep;
 import com.questhelper.steps.conditional.ConditionForStep;
+import net.runelite.api.QuestState;
 import net.runelite.api.Skill;
 import net.runelite.api.coords.WorldPoint;
 
 @QuestDescriptor(
-	quest = QuestHelperQuest.MONKEY_MADNESS_II
+	quest = QuestHelperQuest.MONKEY_MADNESS_II_TESTING
 )
 public class MonkeyMadnessII extends BasicQuestHelper
 {
@@ -119,121 +120,10 @@ public class MonkeyMadnessII extends BasicQuestHelper
 		setupConditionalSteps();
 		Map<Integer, QuestStep> steps = new HashMap<>();
 
-		steps.put(0, talkToNarnode);
-
-		ConditionalStep investigatingGlough = new ConditionalStep(this, goInvestigateGloughHouse);
-		investigatingGlough.addStep(talkedToAnita, goInvestigateUpstairs);
-		investigatingGlough.addStep(foundHandkerchief, goTalkToAnita);
-		steps.put(5, investigatingGlough);
-
-		ConditionalStep goTranslate = new ConditionalStep(this, useTranslationOnNote);
-		goTranslate.addStep(triedTranslating, goShowNoteToNarnode);
-		steps.put(6, goTranslate);
-
-		steps.put(7, goTalkToAnitaWithNote);
-		steps.put(8, bringTranslationToNarnode);
-		steps.put(9, talkToAuguste);
-		steps.put(10, talkToNarnodeAfterEntrana);
-
-		steps.put(15, talkToGarkor);
-		steps.put(20, talkToAwowogei);
-		steps.put(25, talkToGarkorAfterAwow);
-		steps.put(30, talkToArcher);
-		steps.put(35, enterTrapdoor);
-
 		ConditionalStep traverseAgilityArea = new ConditionalStep(this, enterTrapdoor);
 		traverseAgilityArea.addStep(greegreeNearby, pickUpGreegree);
 		traverseAgilityArea.addStep(inCaves, doAgilitySection);
-		steps.put(40, traverseAgilityArea);
-
-		ConditionalStep goMakeGreegree = new ConditionalStep(this, goDownToZooknock);
-		goMakeGreegree.addStep(new Conditions(inZooknockDungeon), talkToZooknock);
-		goMakeGreegree.addStep(new Conditions(inCaves, hasKruksPaw), leaveKrukDungeon);
-		goMakeGreegree.addStep(krukCorpseNearby, pickUpKrukCorpse);
-		steps.put(45, goMakeGreegree);
-
-		steps.put(50, talkToAwowAsKruk);
-		steps.put(55, talkToGarkorAfterKruk);
-
-		ConditionalStep goDefeatKob = new ConditionalStep(this, enterTrollStronghold);
-		goDefeatKob.addStep(kob2Nearby, fightKob);
-		goDefeatKob.addStep(inStrongholdFloor2, talkToKob);
-
-		ConditionalStep goDefeatKeef = new ConditionalStep(this, talkToKeef);
-		goDefeatKeef.addStep(keef2Nearby, fightKeef);
-
-		ConditionalStep defeatKobAndKeef = new ConditionalStep(this, goDefeatKob);
-		defeatKobAndKeef.addStep(defeatedKob, goDefeatKeef);
-		steps.put(60, defeatKobAndKeef);
-		steps.put(61, defeatKobAndKeef);
-		steps.put(62, defeatKobAndKeef);
-		steps.put(63, defeatKobAndKeef);
-		steps.put(64, defeatKobAndKeef);
-
-		steps.put(65, talkToGarkorAfterKeef);
-
-		ConditionalStep goTalkToSmith = new ConditionalStep(this, findSmith);
-		goTalkToSmith.addStep(smithNearby, talkToSmith);
-	//	goTalkToSmith.addStep(smithInLocation4, goUpTo4);
-		steps.put(66, goTalkToSmith);
-
-		steps.put(70, talkToGarkorAfterSmith);
-
-		steps.put(71, sabotageShips);
-
-		steps.put(75, talkToGarkorAfterSabotage);
-
-		ConditionalStep enterLab = new ConditionalStep(this, enterKrukDungeonAgain);
-		enterLab.addStep(isPastMonkeyBars, enterLabratory);
-		enterLab.addStep(inCaves, climbMonkeyBarsAsKruk);
-
-		ConditionalStep fightingGorillasInLab = new ConditionalStep(this, enterLab);
-		fightingGorillasInLab.addStep(new Conditions(inLab, gorillaNotOnHoldingArea), fightGorillas);
-		fightingGorillasInLab.addStep(inLab, climbOnGorilla);
-		steps.put(80, fightingGorillasInLab);
-
-		ConditionalStep sabotageOnyx = new ConditionalStep(this, enterLab);
-		sabotageOnyx.addStep(new Conditions(inLab, hasDeconstructedOnyx), useOnyxOnDevice);
-		sabotageOnyx.addStep(new Conditions(inLab, hasChargedOnyx, hasChiselAndHammer), useChiselOnOnyx);
-		sabotageOnyx.addStep(new Conditions(inLab, hasChiselAndHammer), tamperWithDevice);
-		sabotageOnyx.addStep(inLab, getChiselAndHammer);
-		steps.put(95, sabotageOnyx);
-
-		ConditionalStep goInspectMutagen = new ConditionalStep(this, enterLab);
-		goInspectMutagen.addStep(inLab, investigateIncubationChamber);
-		steps.put(100, goInspectMutagen);
-
-		steps.put(105, talkToGarkorAfterLab);
-		steps.put(110, talkToAwowAfterLab);
-		steps.put(115, talkToGarkorAfterLabAgain);
-		steps.put(120, talkToGarkorAfterLabAgain);
-
-		steps.put(125, talkToNarnodeAfterLab);
-
-		steps.put(130, talkToNieve);
-
-		ConditionalStep defendingTheTree = new ConditionalStep(this, killGorillasInStronghold);
-		defendingTheTree.addStep(killedGorillas, enterNorthOfTree);
-		steps.put(140, defendingTheTree);
-
-		ConditionalStep goDefeatDemonicAndTorturedGorillas = new ConditionalStep(this, enterNorthOfTree);
-		goDefeatDemonicAndTorturedGorillas.addStep(inCrashSiteCavern, killTorturedAndDemonic);
-		goDefeatDemonicAndTorturedGorillas.addStep(isNorthOfTree, enterStrongholdCave);
-
-		steps.put(145, goDefeatDemonicAndTorturedGorillas);
-		steps.put(150, goDefeatDemonicAndTorturedGorillas);
-		steps.put(155, goDefeatDemonicAndTorturedGorillas);
-
-		ConditionalStep goDefeatGlough = new ConditionalStep(this, enterNorthOfTreeNoNieve);
-		goDefeatGlough.addStep(inCrashSiteCavern, fightGlough);
-		goDefeatGlough.addStep(isNorthOfTree, enterStrongholdCave);
-		steps.put(165, goDefeatGlough);
-
-		ConditionalStep finishQuest = new ConditionalStep(this, talkToNarnodeToFinish);
-		finishQuest.addStep(isNorthOfTree, talkToZooknockToFinish);
-		steps.put(180, finishQuest);
-		steps.put(185, talkToNarnodeToFinish);
-		steps.put(190, talkToNarnodeToFinish);
+		steps.put(0, traverseAgilityArea);
 
 		return steps;
 	}
@@ -695,6 +585,12 @@ public class MonkeyMadnessII extends BasicQuestHelper
 			new ArrayList<>(Arrays.asList(talkToNarnodeAfterLab, talkToNieve, killGorillasInStronghold, enterNorthOfTree, enterStrongholdCave, killTorturedAndDemonic,
 				fightGlough, talkToZooknockToFinish, talkToNarnodeToFinish)), combatGear2));
 		return allSteps;
+	}
+
+	@Override
+	public boolean isCompleted()
+	{
+		return false;
 	}
 }
 
